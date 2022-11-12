@@ -31,28 +31,50 @@ function renderCountries() {
 
 renderCountries();
 
+// display border countries
+
 // display particular country details
 let detailSection = document.querySelector(".detailed-section");
 const mainCountrySection = document.querySelector(".main-country");
 const backBtn = document.getElementById("back-btn");
 
 document.addEventListener("click", function (e) {
-  let html = "";
   let parentElement = e.target.parentElement;
   let parentElementId = parentElement.dataset.id;
+  let borderItem = e.target.className;
+
+  console.log();
   if (
     parentElement.className === "country-section" ||
     parentElement.className === "image-section"
   ) {
     detailSection.classList.remove("hidden");
-    let url = `https://restcountries.com/v2/name/${parentElementId}`;
+    handleParticularCountry(parentElementId);
+    backBtn.addEventListener("click", function () {
+      detailSection.classList.add("hidden");
+    });
+  }
+});
 
-    fetch(url)
-      .then((resp) => resp.json())
-      .then((data) => {
-        let country = data[0];
-        console.log(country);
-        html = `
+function handleParticularCountry(urlParameter) {
+  let html = "";
+  let url = `https://restcountries.com/v2/name/${urlParameter}`;
+
+  fetch(url)
+    .then((resp) => resp.json())
+    .then((data) => {
+      let country = data[0];
+      let borderHtml = "";
+      if (country.borders) {
+        country.borders.forEach((border) => {
+          borderHtml += `
+              <li class="border-item" data-borderName="${border}">${border}</li>
+            `;
+        });
+      } else {
+        borderHtml = `<li class="border-item"> No borders..</li>`;
+      }
+      html = `
         <div class="flag"><img src="${country.flags.png}" alt="country flag" /></div>
         <div class="about">
           <div class="name">${country.name}</div>
@@ -73,19 +95,15 @@ document.addEventListener("click", function (e) {
           <div class="border-countries">
             Border Countries:
             <ul>
-              <li></li>
+              ${borderHtml}
             </ul>
           </div>
         </div>
         `;
 
-        mainCountrySection.innerHTML = html;
-        backBtn.addEventListener("click", function () {
-          detailSection.classList.add("hidden");
-        });
-      });
-  }
-});
+      mainCountrySection.innerHTML = html;
+    });
+}
 
 // search by region
 
