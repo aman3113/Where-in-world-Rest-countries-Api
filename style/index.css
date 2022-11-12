@@ -143,6 +143,7 @@ header {
 
 .border-countries ul {
   list-style: none;
+  display: flex;
 }
 
 .border-countries ul li {
@@ -152,6 +153,7 @@ header {
   font-size: 12px;
   font-weight: 300;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 /* container */

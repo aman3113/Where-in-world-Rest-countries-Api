@@ -1,4 +1,4 @@
-// fetch("https://restcountries.com/v3.1/region/e")
+// fetch("https://restcountries.com/v2/alpha/dza")
 //   .then((resp) => resp.json())
 //   .then((data) => {
 //     console.log(data);
@@ -41,29 +41,78 @@ const backBtn = document.getElementById("back-btn");
 document.addEventListener("click", function (e) {
   let parentElement = e.target.parentElement;
   let parentElementId = parentElement.dataset.id;
-  let borderItem = e.target.className;
+  let borderItem = e.target;
 
-  console.log();
   if (
     parentElement.className === "country-section" ||
     parentElement.className === "image-section"
   ) {
     detailSection.classList.remove("hidden");
-    handleParticularCountry(parentElementId);
+    let url = `https://restcountries.com/v2/name/${parentElementId}`;
+    handleParticularCountry(url);
     backBtn.addEventListener("click", function () {
       detailSection.classList.add("hidden");
     });
   }
+
+  if (borderItem.className === "border-item") {
+    let borderName = borderItem.dataset.bordername.toLowerCase();
+    let html = "";
+    let url = `https://restcountries.com/v2/alpha/${borderName}`;
+    fetch(url)
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data);
+        let borderHtml = "";
+        if (data.borders) {
+          data.borders.forEach((border) => {
+            borderHtml += `
+              <li class="border-item" data-borderName="${border}">${border}</li>
+            `;
+          });
+        } else {
+          borderHtml = `<li> No borders..</li>`;
+        }
+        html = `
+        <div class="flag"><img src="${data.flags.png}" alt="country flag" /></div>
+        <div class="about">
+          <div class="name">${data.name}</div>
+          <div class="name-details">
+            <div class="name-details-left">
+              <p>Native Name: <span>${data.nativeName}</span></p>
+              <p>Population: <span>${data.population}</span></p>
+              <p>Region: <span>${data.region}</span></p>
+              <p>Sub Region: <span>${data.subregion}</span></p>
+              <p>Capital: <span>${data.capital}</span></p>
+            </div>
+            <div class="name-details-right">
+              <p>Top Level Domain: <span>${data.topLevelDomain}</span></p>
+              <p>Currencies: <span>${data.currencies[0].name}</span></p>
+              <p>Languages: <span>${data.languages[0].name}</span></p>
+            </div>
+          </div>
+          <div class="border-countries">
+            Border Countries:
+            <ul>
+              ${borderHtml}
+            </ul>
+          </div>
+        </div>
+        `;
+
+        mainCountrySection.innerHTML = html;
+      });
+  }
 });
 
-function handleParticularCountry(urlParameter) {
+function handleParticularCountry(url) {
+  console.log(url);
   let html = "";
-  let url = `https://restcountries.com/v2/name/${urlParameter}`;
-
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
       let country = data[0];
+      console.log(data);
       let borderHtml = "";
       if (country.borders) {
         country.borders.forEach((border) => {
@@ -72,7 +121,7 @@ function handleParticularCountry(urlParameter) {
             `;
         });
       } else {
-        borderHtml = `<li class="border-item"> No borders..</li>`;
+        borderHtml = `<li> No borders..</li>`;
       }
       html = `
         <div class="flag"><img src="${country.flags.png}" alt="country flag" /></div>
