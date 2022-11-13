@@ -222,6 +222,11 @@ header {
   border-radius: 5px;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 3px 3px 10px 2px;
+}
+
+.country-section:hover {
+  transform: translate(0, -10px);
 }
 
 .image-section {

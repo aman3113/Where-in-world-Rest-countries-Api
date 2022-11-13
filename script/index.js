@@ -31,8 +31,6 @@ function renderCountries() {
 
 renderCountries();
 
-// display border countries
-
 // display particular country details
 let detailSection = document.querySelector(".detailed-section");
 const mainCountrySection = document.querySelector(".main-country");
