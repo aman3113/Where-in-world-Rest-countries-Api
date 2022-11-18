@@ -42,11 +42,13 @@ header {
   top: 0;
   z-index: 15;
   color: var(--white);
+  box-shadow: 0px 0px 5px 0 black;
 }
 
 .right-head {
   font-weight: 300;
   font-size: 1.2rem;
+  cursor: pointer;
 }
 
 /* detailed section */
@@ -73,10 +75,11 @@ header {
   padding: 5px 30px 5px 20px;
   background: var(--blue);
   border: none;
-  box-shadow: 1px 1px 15px 2px black;
+  box-shadow: 0px 0px 5px 0px black;
   border-radius: 3px;
   color: var(--white);
   cursor: pointer;
+  font-weight: 600;
 }
 
 .main-country {
@@ -154,6 +157,7 @@ header {
   font-weight: 300;
   border-radius: 3px;
   cursor: pointer;
+  box-shadow: 0 0 5px 0 black;
 }
 
 /* container */
@@ -171,10 +175,12 @@ header {
 .search-bar {
   position: relative;
   width: 30%;
+  box-shadow: 0 0px 5px 0 black;
 }
 
 .list-bar {
   width: 20%;
+  box-shadow: 0 0px 5px 0px rgb(31, 31, 31);
 }
 
 .search-bar i {
@@ -182,6 +188,7 @@ header {
   bottom: 30%;
   left: 30px;
   color: var(--white);
+  border: none;
 }
 
 .search-bar input {
@@ -216,13 +223,12 @@ header {
 }
 
 .country-section {
-  border: 1px solid black;
   height: 45vh;
   width: 250px;
   border-radius: 5px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 3px 3px 10px 2px;
+  box-shadow: 1px 2px 5px;
 }
 
 .country-section:hover {
@@ -261,4 +267,16 @@ header {
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 5px;
+}
+
+/* Dark mode */
+
+.dark-mode {
+  background-color: var(--light-gray);
+  color: hsl(200, 15%, 8%);
+}
+
+.element-dark-mode {
+  background-color: var(--white) !important;
+  color: var(--light-blue) !important;
 }

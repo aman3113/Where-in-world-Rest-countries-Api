@@ -53,7 +53,7 @@ document.addEventListener("click", function (e) {
     });
   }
 
-  if (borderItem.className === "border-item") {
+  if (borderItem.className === "border-item item") {
     let borderName = borderItem.dataset.bordername.toLowerCase();
     let html = "";
     let url = `https://restcountries.com/v2/alpha/${borderName}`;
@@ -65,11 +65,11 @@ document.addEventListener("click", function (e) {
         if (data.borders) {
           data.borders.forEach((border) => {
             borderHtml += `
-              <li class="border-item" data-borderName="${border}">${border}</li>
+              <li class="border-item item" data-borderName="${border}">${border}</li>
             `;
           });
         } else {
-          borderHtml = `<li> No borders..</li>`;
+          borderHtml = `<li class="item"> No borders..</li>`;
         }
         html = `
         <div class="flag"><img src="${data.flags.png}" alt="country flag" /></div>
@@ -104,22 +104,20 @@ document.addEventListener("click", function (e) {
 });
 
 function handleParticularCountry(url) {
-  console.log(url);
   let html = "";
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
       let country = data[0];
-      console.log(data);
       let borderHtml = "";
       if (country.borders) {
         country.borders.forEach((border) => {
           borderHtml += `
-              <li class="border-item" data-borderName="${border}">${border}</li>
+              <li class="border-item item" data-borderName="${border}">${border}</li>
             `;
         });
       } else {
-        borderHtml = `<li> No borders..</li>`;
+        borderHtml = `<li class="item"> No borders..</li>`;
       }
       html = `
         <div class="flag"><img src="${country.flags.png}" alt="country flag" /></div>
@@ -215,4 +213,35 @@ function renderCountryByName() {
       });
       mainDisplay.innerHTML = html;
     });
+}
+
+//  dark  mode
+
+const darkMode = document.querySelector(".right-head");
+darkMode.addEventListener("click", toggleDarkMode);
+
+function toggleDarkMode() {
+  let changeElement = document.querySelector(".dark-light");
+  if (changeElement.textContent === "Dark Mode") {
+    changeElement.textContent = "Light Mode";
+  } else {
+    changeElement.textContent = "Dark Mode";
+  }
+
+  document.body.classList.toggle("dark-mode");
+  detailSection.classList.toggle("dark-mode");
+  mainCountrySection.classList.toggle("dark-mode");
+  document.querySelector(".display").classList.toggle("dark-mode");
+  inputEl.classList.toggle("element-dark-mode");
+  regionInput.classList.toggle("element-dark-mode");
+
+  document.querySelectorAll(".description-section").forEach((element) => {
+    element.classList.toggle("element-dark-mode");
+  });
+
+  document.querySelectorAll(".item").forEach((element) => {
+    element.classList.toggle("element-dark-mode");
+  });
+
+  backBtn.classList.toggle("element-dark-mode");
 }
