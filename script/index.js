@@ -189,7 +189,7 @@ inputEl.addEventListener("keyup", renderCountryByName);
 function renderCountryByName() {
   let html = "";
   let countriesArray = [];
-  let nameValue = inputEl.value;
+  let nameValue = inputEl.value.toLowerCase();
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
