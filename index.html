@@ -1,69 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+			integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
 
-    <link rel="stylesheet" href="style/index.css" />
+		<link rel="stylesheet" href="style/index.css" />
 
-    <title>Where in the World?</title>
-  </head>
-  <body>
-    <header class="display">
-      <div class="left-head">Where in the World?</div>
-      <div class="right-head">
-        <i class="fa-regular fa-moon"></i
-        ><span class="dark-light">Dark Mode</span>
-      </div>
-    </header>
+		<title>Where in the World?</title>
+	</head>
+	<body>
+		<header class="display">
+			<div class="left-head">Where in the World?</div>
+			<div class="right-head">
+				<i class="fa-regular fa-moon"></i
+				><span class="dark-light">Dark Mode</span>
+			</div>
+		</header>
 
-    <div class="detailed-section hidden">
-      <div class="back">
-        <button id="back-btn">← Back</button>
-      </div>
-      <div class="main-country"></div>
-    </div>
+		<div class="detailed-section hidden">
+			<div class="back">
+				<button id="back-btn">← Back</button>
+			</div>
+			<div class="main-country"></div>
+		</div>
 
-    <div class="container">
-      <div class="search-section display">
-        <div class="search-bar">
-          <i class="fa-sharp fa-solid fa-magnifying-glass icon"></i>
-          <input
-            type="search"
-            name="search-country"
-            id="search-country"
-            placeholder="Search for a country..."
-          />
-        </div>
-        <div class="list-bar">
-          <input
-            list="regions"
-            name="region"
-            id="region-list"
-            placeholder="Filter by Region"
-          />
-          <datalist id="regions">
-            <option value="Africa"></option>
-            <option value="America"></option>
-            <option value="Asia"></option>
-            <option value="Europe"></option>
-            <option value="Oceania"></option>
-          </datalist>
-        </div>
-      </div>
+		<div class="container">
+			<div class="search-section display">
+				<div class="search-bar">
+					<i class="fa-sharp fa-solid fa-magnifying-glass icon"></i>
+					<input
+						type="search"
+						name="search-country"
+						id="search-country"
+						placeholder="Search for a country..."
+					/>
+				</div>
+				<div class="list-bar">
+					<input
+						list="regions"
+						name="region"
+						id="region-list"
+						placeholder="Filter by Region"
+					/>
+					<datalist id="regions">
+						<option value="Africa"></option>
+						<option value="America"></option>
+						<option value="Asia"></option>
+						<option value="Europe"></option>
+						<option value="Oceania"></option>
+					</datalist>
+				</div>
+			</div>
 
-      <div class="main"></div>
-    </div>
+			<div class="main"></div>
+		</div>
 
-    <script src="script/index.js"></script>
-  </body>
+		<script src="script/index.js"></script>
+	</body>
 </html>

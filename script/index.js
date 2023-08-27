@@ -8,12 +8,12 @@ const mainDisplay = document.querySelector(".main");
 let url = "https://restcountries.com/v3.1/all";
 
 function renderCountries() {
-  let html = "";
-  fetch(url)
-    .then((resp) => resp.json())
-    .then((data) => {
-      data.forEach((country) => {
-        html += `
+	let html = "";
+	fetch(url)
+		.then((resp) => resp.json())
+		.then((data) => {
+			data.forEach((country) => {
+				html += `
         <div class="country-section" data-id="${country.name.common}">
             <div class="image-section" data-id="${country.name.common}"><img src="${country.flags.png}" alt="country flag" /></div>
             <div class="description-section">
@@ -24,9 +24,9 @@ function renderCountries() {
             </div>
         </div>
         `;
-      });
-      mainDisplay.innerHTML = html;
-    });
+			});
+			mainDisplay.innerHTML = html;
+		});
 }
 
 renderCountries();
@@ -37,41 +37,41 @@ const mainCountrySection = document.querySelector(".main-country");
 const backBtn = document.getElementById("back-btn");
 
 document.addEventListener("click", function (e) {
-  let parentElement = e.target.parentElement;
-  let parentElementId = parentElement.dataset.id;
-  let borderItem = e.target;
+	let parentElement = e.target.parentElement;
+	let parentElementId = parentElement.dataset.id;
+	let borderItem = e.target;
 
-  if (
-    parentElement.className === "country-section" ||
-    parentElement.className === "image-section"
-  ) {
-    detailSection.classList.remove("hidden");
-    let url = `https://restcountries.com/v2/name/${parentElementId}`;
-    handleParticularCountry(url);
-    backBtn.addEventListener("click", function () {
-      detailSection.classList.add("hidden");
-    });
-  }
+	if (
+		parentElement.className === "country-section" ||
+		parentElement.className === "image-section"
+	) {
+		detailSection.classList.remove("hidden");
+		let url = `https://restcountries.com/v2/name/${parentElementId}`;
+		handleParticularCountry(url);
+		backBtn.addEventListener("click", function () {
+			detailSection.classList.add("hidden");
+		});
+	}
 
-  if (borderItem.className === "border-item item") {
-    let borderName = borderItem.dataset.bordername.toLowerCase();
-    let html = "";
-    let url = `https://restcountries.com/v2/alpha/${borderName}`;
-    fetch(url)
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data);
-        let borderHtml = "";
-        if (data.borders) {
-          data.borders.forEach((border) => {
-            borderHtml += `
+	if (borderItem.className === "border-item item") {
+		let borderName = borderItem.dataset.bordername.toLowerCase();
+		let html = "";
+		let url = `https://restcountries.com/v2/alpha/${borderName}`;
+		fetch(url)
+			.then((resp) => resp.json())
+			.then((data) => {
+				console.log(data);
+				let borderHtml = "";
+				if (data.borders) {
+					data.borders.forEach((border) => {
+						borderHtml += `
               <li class="border-item item" data-borderName="${border}">${border}</li>
             `;
-          });
-        } else {
-          borderHtml = `<li class="item"> No borders..</li>`;
-        }
-        html = `
+					});
+				} else {
+					borderHtml = `<li class="item"> No borders..</li>`;
+				}
+				html = `
         <div class="flag"><img src="${data.flags.png}" alt="country flag" /></div>
         <div class="about">
           <div class="name">${data.name}</div>
@@ -98,28 +98,28 @@ document.addEventListener("click", function (e) {
         </div>
         `;
 
-        mainCountrySection.innerHTML = html;
-      });
-  }
+				mainCountrySection.innerHTML = html;
+			});
+	}
 });
 
 function handleParticularCountry(url) {
-  let html = "";
-  fetch(url)
-    .then((resp) => resp.json())
-    .then((data) => {
-      let country = data[0];
-      let borderHtml = "";
-      if (country.borders) {
-        country.borders.forEach((border) => {
-          borderHtml += `
+	let html = "";
+	fetch(url)
+		.then((resp) => resp.json())
+		.then((data) => {
+			let country = data[0];
+			let borderHtml = "";
+			if (country.borders) {
+				country.borders.forEach((border) => {
+					borderHtml += `
               <li class="border-item item" data-borderName="${border}">${border}</li>
             `;
-        });
-      } else {
-        borderHtml = `<li class="item"> No borders..</li>`;
-      }
-      html = `
+				});
+			} else {
+				borderHtml = `<li class="item"> No borders..</li>`;
+			}
+			html = `
         <div class="flag"><img src="${country.flags.png}" alt="country flag" /></div>
         <div class="about">
           <div class="name">${country.name}</div>
@@ -146,26 +146,26 @@ function handleParticularCountry(url) {
         </div>
         `;
 
-      mainCountrySection.innerHTML = html;
-    });
+			mainCountrySection.innerHTML = html;
+		});
 }
 
 // search by region
 
 const regionInput = document.getElementById("region-list");
 
-regionInput.addEventListener("keyup", renderCountryByRegion);
+regionInput.addEventListener("input", renderCountryByRegion);
 
 function renderCountryByRegion() {
-  let html = "";
-  let inputValue = regionInput.value.toLowerCase();
-  if (inputValue) {
-    let url = `https://restcountries.com/v3.1/region/${inputValue}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        data.forEach((country) => {
-          html += `
+	let html = "";
+	let inputValue = regionInput.value.toLowerCase();
+	if (inputValue) {
+		let url = `https://restcountries.com/v3.1/region/${inputValue}`;
+		fetch(url)
+			.then((res) => res.json())
+			.then((data) => {
+				data.forEach((country) => {
+					html += `
             <div class="country-section">
                 <div class="image-section"><img src="${country.flags.png}" alt="country flag" /></div>
                 <div class="description-section">
@@ -176,10 +176,10 @@ function renderCountryByRegion() {
                 </div>
               </div>
             `;
-        });
-        mainDisplay.innerHTML = html;
-      });
-  }
+				});
+				mainDisplay.innerHTML = html;
+			});
+	}
 }
 
 //  search country by name
@@ -187,19 +187,19 @@ let inputEl = document.getElementById("search-country");
 inputEl.addEventListener("keyup", renderCountryByName);
 
 function renderCountryByName() {
-  let html = "";
-  let countriesArray = [];
-  let nameValue = inputEl.value.toLowerCase();
-  fetch(url)
-    .then((resp) => resp.json())
-    .then((data) => {
-      data.forEach((country) => {
-        if (country.name.common.toLowerCase().includes(nameValue)) {
-          countriesArray.push(country);
-        }
-      });
-      countriesArray.forEach((country) => {
-        html += `
+	let html = "";
+	let countriesArray = [];
+	let nameValue = inputEl.value.toLowerCase();
+	fetch(url)
+		.then((resp) => resp.json())
+		.then((data) => {
+			data.forEach((country) => {
+				if (country.name.common.toLowerCase().includes(nameValue)) {
+					countriesArray.push(country);
+				}
+			});
+			countriesArray.forEach((country) => {
+				html += `
           <div class="country-section">
               <div class="image-section"><img src="${country.flags.png}" alt="country flag" /></div>
               <div class="description-section">
@@ -210,9 +210,9 @@ function renderCountryByName() {
               </div>
             </div>
           `;
-      });
-      mainDisplay.innerHTML = html;
-    });
+			});
+			mainDisplay.innerHTML = html;
+		});
 }
 
 //  dark  mode
@@ -221,27 +221,27 @@ const darkMode = document.querySelector(".right-head");
 darkMode.addEventListener("click", toggleDarkMode);
 
 function toggleDarkMode() {
-  let changeElement = document.querySelector(".dark-light");
-  if (changeElement.textContent === "Dark Mode") {
-    changeElement.textContent = "Light Mode";
-  } else {
-    changeElement.textContent = "Dark Mode";
-  }
+	let changeElement = document.querySelector(".dark-light");
+	if (changeElement.textContent === "Dark Mode") {
+		changeElement.textContent = "Light Mode";
+	} else {
+		changeElement.textContent = "Dark Mode";
+	}
 
-  document.body.classList.toggle("dark-mode");
-  detailSection.classList.toggle("dark-mode");
-  mainCountrySection.classList.toggle("dark-mode");
-  document.querySelector(".display").classList.toggle("dark-mode");
-  inputEl.classList.toggle("element-dark-mode");
-  regionInput.classList.toggle("element-dark-mode");
+	document.body.classList.toggle("dark-mode");
+	detailSection.classList.toggle("dark-mode");
+	mainCountrySection.classList.toggle("dark-mode");
+	document.querySelector(".display").classList.toggle("dark-mode");
+	inputEl.classList.toggle("element-dark-mode");
+	regionInput.classList.toggle("element-dark-mode");
 
-  document.querySelectorAll(".description-section").forEach((element) => {
-    element.classList.toggle("element-dark-mode");
-  });
+	document.querySelectorAll(".description-section").forEach((element) => {
+		element.classList.toggle("element-dark-mode");
+	});
 
-  document.querySelectorAll(".item").forEach((element) => {
-    element.classList.toggle("element-dark-mode");
-  });
+	document.querySelectorAll(".item").forEach((element) => {
+		element.classList.toggle("element-dark-mode");
+	});
 
-  backBtn.classList.toggle("element-dark-mode");
+	backBtn.classList.toggle("element-dark-mode");
 }
